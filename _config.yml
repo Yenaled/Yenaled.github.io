@@ -5,6 +5,6 @@
    hard_wrap: false
  future: true
  jailed: false
- theme: jekyll-theme-primer
+ remote_theme: mmistakes/minimal-mistakes@4.16.6
  gfm_quirks: paragraph_end
  plugins: jekyll-include-cache
