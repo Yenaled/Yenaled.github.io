@@ -14,11 +14,11 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: Delaney Sullivan
-email:
+email: DSullivan@mednet.ucla.edu
 description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  M.D./Ph.D. Student, UCLA-Caltech Medical Scientist Training Program
+  M.S. Computer Science, Stanford University (2019)
+  B.S. Biology, Stanford University (2016)
 twitter_username: DelaneySulliva2
 github_username: Yenaled
 minimal_mistakes_skin: default
