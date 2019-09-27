@@ -59,7 +59,7 @@ author:
       url: 'https://scholar.google.com/citations?user=r8IhPSgAAAAJ'
     - label: "Curriculum Vitae"
       icon: "far fa-fw fa-file"
-      url: 'assets/cv.pdf'
+      url: '/assets/resume.pdf'
 
 footer:
   links :
@@ -74,7 +74,7 @@ footer:
       url: 'https://scholar.google.com/citations?user=r8IhPSgAAAAJ'
     - label: "Curriculum Vitae"
       icon: "far fa-fw fa-file"
-      url: 'assets/cv.pdf'
+      url: '/assets/resume.pdf'
 
 defaults:
   # _posts
