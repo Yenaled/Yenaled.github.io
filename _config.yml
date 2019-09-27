@@ -26,8 +26,8 @@ markdown: kramdown
 remote_theme: mmistakes/minimal-mistakes@4.16.5
 # Outputting
 #permalink: /:categories/:title/
-#paginate: 5 # amount of posts to show
-#paginate_path: /page:num/
+paginate: 5 # amount of posts to show
+paginate_path: /page:num/
 
 include:
   - _pages
@@ -61,7 +61,7 @@ author:
   <b>Stanford University</b><br>
   M.S. Computer Science (2019)<br>
   B.S. Biology (2016)"
-  links:
+  links :
     - label: 'DSullivan@mednet.ucla.edu'
       icon: "fas fa-fw fa-envelope-square"
       url: 'mailto:DSullivan@mednet.ucla.edu'
@@ -69,9 +69,8 @@ author:
       icon: "fab fa-fw fa-linkedin"
       url: 'https://www.linkedin.com/in/delaney-sullivan-79989399'
 
-
 footer:
-  links:
+  links :
     - label: 'DSullivan@mednet.ucla.edu'
       icon: "fas fa-fw fa-envelope-square"
       url: 'mailto:DSullivan@mednet.ucla.edu'
