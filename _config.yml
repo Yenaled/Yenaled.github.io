@@ -16,20 +16,18 @@
 title: Delaney Sullivan
 email: DSullivan@mednet.ucla.edu
 description: >- # this means to ignore newlines until "baseurl:"
-  Delaney Sullivan's personal website and blog
-twitter_username: DelaneySulliva2
+  Delaney K. Sullivan
+twitter_username: @DelaneySulliva2
 github_username: Yenaled
-minimal_mistakes_skin: contrast
 search: true
 
 # Build settings
 markdown: kramdown
-remote_theme: mmistakes/minimal-mistakes
+remote_theme: mmistakes/minimal-mistakes@4.16.5
 # Outputting
-permalink: /:categories/:title/
-paginate: 5 # amount of posts to show
-paginate_path: /page:num/
-timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+#permalink: /:categories/:title/
+#paginate: 5 # amount of posts to show
+#paginate_path: /page:num/
 
 include:
   - _pages
@@ -51,7 +49,6 @@ plugins:
   - jekyll-paginate
   - jekyll-sitemap
   - jekyll-gist
-  - jekyll-feed
   - jemoji
   - jekyll-include-cache
 
@@ -64,8 +61,23 @@ author:
   <b>Stanford University</b><br>
   M.S. Computer Science (2019)<br>
   B.S. Biology (2016)"
+  links:
+    - label: 'DSullivan@mednet.ucla.edu'
+      icon: "fas fa-fw fa-envelope-square"
+      url: 'mailto:DSullivan@mednet.ucla.edu'
+    - label: "in/delaney-sullivan-79989399"
+      icon: "fab fa-fw fa-linkedin"
+      url: 'https://www.linkedin.com/in/delaney-sullivan-79989399'
+
 
 footer:
+  links:
+    - label: 'DSullivan@mednet.ucla.edu'
+      icon: "fas fa-fw fa-envelope-square"
+      url: 'mailto:DSullivan@mednet.ucla.edu'
+    - label: "in/delaney-sullivan-79989399"
+      icon: "fab fa-fw fa-linkedin"
+      url: 'https://www.linkedin.com/in/delaney-sullivan-79989399'
 
 defaults:
   # _posts
@@ -86,10 +98,3 @@ defaults:
     values:
       layout: single
       author_profile: true
-
-category_archive:
-  type: liquid
-  path: /categories/
-tag_archive:
-  type: liquid
-  path: /tags/
