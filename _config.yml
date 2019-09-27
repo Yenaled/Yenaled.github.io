@@ -58,11 +58,11 @@ plugins:
 author:
   name   : "Delaney Sullivan"
   avatar : "/assets/images/bio-photo.jpg"
-  bio    : "<b>UCLA-Caltech MSTP</b>
+  bio    : "<b>UCLA-Caltech</b><br>
   M.D./Ph.D. Student
-  
-  <b>Stanford University</b>
-  M.S. Computer Science (2019)
+  <br><br>
+  <b>Stanford University</b><br>
+  M.S. Computer Science (2019)<br>
   B.S. Biology (2016)"
   links:
     - label: "Website"
