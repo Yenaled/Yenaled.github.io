@@ -57,6 +57,9 @@ author:
     - label: "Google Scholar"
       icon: "fab fa-fw fa-google"
       url: 'https://scholar.google.com/citations?user=r8IhPSgAAAAJ'
+    - label: "Curriculum Vitae"
+      icon: "far fa-fw fa-file"
+      url: 'assets/cv.pdf'
 
 footer:
   links :
@@ -69,6 +72,9 @@ footer:
     - label: "Google Scholar"
       icon: "fab fa-fw fa-google"
       url: 'https://scholar.google.com/citations?user=r8IhPSgAAAAJ'
+    - label: "Curriculum Vitae"
+      icon: "far fa-fw fa-file"
+      url: 'assets/cv.pdf'
 
 defaults:
   # _posts
