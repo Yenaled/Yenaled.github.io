@@ -50,18 +50,24 @@ author:
     - label: 'DSullivan@mednet.ucla.edu'
       icon: "fas fa-fw fa-envelope-square"
       url: 'mailto:DSullivan@mednet.ucla.edu'
-    - label: "in/delaneysullivan"
+    - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       url: 'https://www.linkedin.com/in/delaney-sullivan-79989399'
+    - label: "Google Scholar"
+      icon: "fab fa-fw fa-google"
+      url: 'https://scholar.google.com/citations?user=r8IhPSgAAAAJ'
 
 footer:
   links :
     - label: 'DSullivan@mednet.ucla.edu'
       icon: "fas fa-fw fa-envelope-square"
       url: 'mailto:DSullivan@mednet.ucla.edu'
-    - label: "in/delaneysullivan"
+    - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       url: 'https://www.linkedin.com/in/delaney-sullivan-79989399'
+    - label: "Google Scholar"
+      icon: "fab fa-fw fa-google"
+      url: 'https://scholar.google.com/citations?user=r8IhPSgAAAAJ'
 
 defaults:
   # _posts
