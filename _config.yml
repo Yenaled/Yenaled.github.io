@@ -58,9 +58,12 @@ plugins:
 author:
   name   : "Delaney Sullivan"
   avatar : "/assets/images/bio-photo.jpg"
-  bio    : "M.D./Ph.D. Student, UCLA-Caltech Medical Scientist Training Program
-  M.S. Computer Science, Stanford University (2019)
-  B.S. Biology, Stanford University (2016)"
+  bio    : "<b>UCLA-Caltech MSTP</b>
+  M.D./Ph.D. Student
+  
+  <b>Stanford University</b>
+  M.S. Computer Science (2019)
+  B.S. Biology (2016)"
   links:
     - label: "Website"
       icon: "fas fa-fw fa-link"
