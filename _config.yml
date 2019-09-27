@@ -58,7 +58,9 @@ plugins:
 author:
   name   : "Delaney Sullivan"
   avatar : "/assets/images/bio-photo.jpg"
-  bio    : "My awesome biography constrained to a sentence or two goes here."
+  bio    : "M.D./Ph.D. Student, UCLA-Caltech Medical Scientist Training Program
+  M.S. Computer Science, Stanford University (2019)
+  B.S. Biology, Stanford University (2016)"
   links:
     - label: "Website"
       icon: "fas fa-fw fa-link"
