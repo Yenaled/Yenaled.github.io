@@ -6,6 +6,10 @@ twitter_username: '@DelaneySulliva2'
 github_username: Yenaled
 search: true
 
+excerpt: "Delaney Sullivan"
+header:
+  overlay_image: /assets/bg.png
+
 # Build settings
 markdown: kramdown
 remote_theme: mmistakes/minimal-mistakes@4.16.5
