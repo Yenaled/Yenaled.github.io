@@ -1,6 +1,8 @@
 ---
 permalink: /about/
 title: "About"
+header:
+  overlay_image: /assets/bg.png
 ---
 
 * Interests: Genomics, Oncology, Molecular Biology, Bioinformatics, Computer Science, Medicine
