@@ -1,6 +1,7 @@
 ---
 permalink: /about/
 title: "About"
+excerpt: "UCLA-Caltech M.D./Ph.D. Student"
 header:
   overlay_image: /assets/bg.png
 ---
