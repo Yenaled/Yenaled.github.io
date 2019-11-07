@@ -62,7 +62,7 @@ author:
       icon: "fab fa-fw fa-google"
       url: 'https://scholar.google.com/citations?user=r8IhPSgAAAAJ'
     - label: "Biostars Profile"
-      icon: "fab fa-fw fa-star"
+      icon: "fas fa-fw fa-star"
       url: 'https://www.biostars.org/u/30020/'
     - label: "Curriculum Vitae"
       icon: "far fa-fw fa-file"
@@ -80,7 +80,7 @@ footer:
       icon: "fab fa-fw fa-google"
       url: 'https://scholar.google.com/citations?user=r8IhPSgAAAAJ'
     - label: "Biostars Profile"
-      icon: "fab fa-fw fa-star"
+      icon: "fas fa-fw fa-star"
       url: 'https://www.biostars.org/u/30020/'
     - label: "Curriculum Vitae"
       icon: "far fa-fw fa-file"
