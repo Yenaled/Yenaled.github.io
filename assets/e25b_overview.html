@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>E25B: Dideoxy Chain Termination Method of DNA Sequencing</title>
+	<link rel="stylesheet" href="e25b_style.css" type="text/css" />
+</head>
+<body>
+	<div id="container">
+		<div id="header">
+			<div id="logo">
+				<a href="e25b.html">E25B: Dideoxy Chain Termination Method of DNA Sequencing</a>
+			</div>
+			<div id="navigation">
+				<ul>
+					<li><a href="e25b.html">Home</a></li>
+					<li><a href="e25b_history.html">History</a></li>
+					<li><a href="e25b_overview.html">Overview</a></li>
+					<li><a href="e25b_activity.html">Activity</a></li>
+					<li><a href="e25b_quiz.html">Quiz</a></li>
+					<li><a href="e25b_glossary.html">Glossary</a></li>
+					<li><a href="e25b_credit.html">Credit</a></li>
+				</ul>
+			</div>
+		</div>
+		<div id="content">
+		<div id="wrapper">
+		<h1 class="page_head">Overview</h1>
+			<div id="materials"><p>
+				Materials needed:
+				<ol>
+					<li>
+						Single-stranded DNA (ssDNA) sample of the DNA we want to sequence
+						<ul>
+							<li>The DNA should be amplified (e.g. via PCR) to ensure we have enough DNA in the sample</li>
+							<li>Single-stranded DNA can be obtained by using heat to denature double-stranded DNA</li>
+						</ul>
+					</li>
+					<li>DNA primer</li>
+					<li>DNA polymerase</li>
+					<li>
+						Deoxynucleosidetriphosphates (dNTPs)
+						<ul>
+							<li>dATP, dTTP, dCTP, dGTP</li>
+						</ul>
+					</li>
+					<li>
+						Dideoxynucleosidetriphosphates (ddNTPs) labeled either fluorescently or radioactively
+						<ul>
+							<li>ddATP, ddTTP, ddCTP, ddGTP</li>
+							<li>These nucleotides lack a hydroxyl (-OH) group on the 3' end therefore DNA polymerase cannot add nucleotides to these nucleotides. Thus, once a dideoxynucleotide is added, the extension of the DNA strand terminates. That is why these nucleotides are referred to as "chain terminating" nucleotides. The figure below compares deoxyribose (the sugar found in DNA) and dideoxyribose (the sugar found in ddNTPs); note the absence of the 3' OH group in dideoxyribose.<br /><img height="170px" src="images/dideoxyribose.png" /></li>
+							<li>These ddNTPs are labeled fluorescently or radioactively so we can view them later.</li>
+						</ul>
+					</li>
+					<li>Polyacrylamide-urea gel<ul><li>So we can view the "chain terminated" strands via gel electrophoresis</li></ul></li>
+				</ol>
+				<input type="button" value="Next" onclick="javascript:document.getElementById('procedure').style.display='block'; document.getElementById('materials').style.display='none'" />
+			</p></div>
+			<div id="procedure" style="display: none"><p>
+				Procedure:
+				<ol>
+					<li>
+						Prepare a mixture of the ssDNA, the DNA primer, the dNTPs, and the DNA polymerase
+						<ul>
+							<li>This will allow for the DNA polymerase to initiate DNA replication</li>
+						</ul>
+					</li>
+					<li>Divide the mixture into four tubes</li>
+					<li>Add a different ddNTP to each tube</li>
+					<li>Allow the reaction to proceed in each tube<ul><li>The non-template DNA strand will continue elongating until the DNA polymerase happens to incorporate a ddNTP rather than a normal dNTP.</li></ul></li>
+					<li>Denature the products into ssDNA (separate the template strands from the newly formed "chain terminated" strands)</li>
+					<li>Transfer the contents of the four tubes to four lanes (one for each ddNTP) of the polyacrylamide-urea gel</li>
+					<li>Perform gel electrophoresis to separate the "chain terminated" strands by size
+						<ul><li>The strands move towards the positive electrode (anode) -- the smaller strands will move farther down the gel than the larger strands</li></ul></li>
+				</ol>
+				<input type="button" value="Previous" onclick="javascript:document.getElementById('materials').style.display='block'; document.getElementById('procedure').style.display='none'" />
+			</p></div>
+		</div>
+		</div>
+		<div id="footer">
+			Site created by Delaney Sullivan on May 27, 2013
+		</div>
+	</div>
+</body>
+</html>
