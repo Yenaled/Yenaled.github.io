@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>E25B: Dideoxy Chain Termination Method of DNA Sequencing</title>
+	<link rel="stylesheet" href="e25b_style.css" type="text/css" />
+	<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+	<script>
+		var timeOuts = new Array();
+		function getComplementaryPairs(strand)
+		{
+			var new_strand = "";
+			for (i = 0; i < strand.length; i++)
+			{
+				if (strand.charAt(i) == 'A')
+					new_strand += 'T'
+				else if (strand.charAt(i) == 'T')
+					new_strand += 'A'
+				else if (strand.charAt(i) == 'C')
+					new_strand += 'G'
+				else if (strand.charAt(i) == 'G')
+					new_strand += 'C'
+			}
+			return new_strand;
+		}
+
+		function numTerminators(strand, term_char)
+		{
+			var num = 0;
+			for (i = 0; i < strand.length; i++)
+			{
+				if (strand.charAt(i) == term_char)
+					num++;
+			}
+			return num;
+		}
+
+
+		function drawStrand(upper_strand, lower_strand, nucleotide_type)
+		{
+			var text = "5' ";
+			for (i = 0; i < upper_strand.length; i++)
+			{
+				if (i < 18)
+				text += '<span class="primer_dna_base">' + upper_strand.charAt(i) + '</span>';
+				else if (nucleotide_type == 1 && i == upper_strand.length - 1)
+				text += '<span class="ddntp_dna_base">' + upper_strand.charAt(i) + '</span>';
+				else
+				text += '<span class="dntp_dna_base">' + upper_strand.charAt(i) + '</span>';
+			}
+			text += " 3'<br />3' ";
+			for (i = 0; i < lower_strand.length; i++)
+			{
+				text += '<span class="template_dna_base">' + lower_strand.charAt(i) + '</span>';
+			}
+			text += " 5'";
+			return text;
+		}
+
+		function updateStrand(new_strand, template_strand, j, end)
+		{
+			if (!end)
+			$($(".dna").get(j)).html('<div style="background-color: #DDD">' + drawStrand(new_strand, template_strand, end) + '</div>');
+			else
+			$($(".dna").get(j)).html(drawStrand(new_strand, template_strand, end));
+		} 
+
+function callUpdate(new_strand, reversed_dna, j, end) {
+    return function() {
+        updateStrand(new_strand, reversed_dna, j, end);
+    };
+}
+
+		function getRandomDNASequence()
+		{
+			var dna = "";
+			var len = 25 + Math.floor(40 * Math.random());
+			for( var i=0; i < len; i++ )
+				dna += "ATCG".charAt(Math.floor(4 * Math.random()));
+			$("#dna_sequence").val(dna);
+
+		}
+
+			function clearAllTimeouts(){  
+  					for(key in timeOuts ){  
+  					  clearTimeout(timeOuts[key]);  
+  					} 
+			}
+
+		function generateDNA(dna, terminating_base)
+		{
+
+			$("#activity").hide();
+			$("#activity_2").show();
+			$(".saved").show();
+			$(".saved").click(function() {  clearAllTimeouts();  $("#activity").show(); $("#activity_2").hide(); $(".saved").hide(); });
+
+			var reversed_dna = dna.split("").reverse().join("");
+			var primer = getComplementaryPairs(reversed_dna.substring(0, 18));
+			terminating_base = getComplementaryPairs(terminating_base);
+			var numterm = numTerminators(reversed_dna.substring(18, dna.length), terminating_base);
+			$("#activity_2").html("<p>Dideoxy Chain Termination Reaction:</p>");
+			for (i = 0; i < numterm; i++)
+			{
+				$("#activity_2").html($("#activity_2").html() + '<div class="dna"></div><br />');
+			}
+			$(".dna").html(drawStrand(primer, reversed_dna, 0));
+
+			var iter_times = reversed_dna.length - primer.length;
+			var count = 0;
+			for (var j = 0; j < numterm; j++)
+			{
+				var i = 0;
+				var new_strand = primer;
+				var ignore = 0;
+				while (i < iter_times)
+				{
+					count++;
+					if (reversed_dna.charAt(primer.length + i) == terminating_base)
+					{
+						if (ignore == j)
+						{
+							new_strand += getComplementaryPairs(reversed_dna.charAt(new_strand.length));
+							timeOuts["a" + count] = setTimeout(callUpdate(new_strand, reversed_dna, j, 1),
+							600*count);
+							break;
+						}
+						ignore++;
+					}
+					i++;
+					new_strand += getComplementaryPairs(reversed_dna.charAt(new_strand.length));
+					timeOuts["b" + count] = setTimeout(callUpdate(new_strand, reversed_dna, j, 0),
+						600*count);
+				}
+			}
+			$("#activity_2").html($("#activity_2").html() + '<p><ul><li style="color: #444">The dark nucleotides form the template strand</li><li style="color: purple">The purple nucleotides form the DNA primer</li><li style="color: #A1A1D8">The light blue nucleotides are the dNTPs added to the 3\' end of the growing DNA strand.</li><li style="color: red">The red nucleotides are the dideoxynucleotides (i.e. the chain-terminating nucleotides)</li></ul></p>');
+		}
+
+
+
+
+		function generateGel(dna)
+		{
+
+			$("#activity").hide();
+			$("#activity_2").show();
+			$(".saved").show();
+			$(".saved").click(function() {  clearAllTimeouts();  $("#activity").show(); $("#activity_2").hide(); $(".saved").hide(); });
+
+			var reversed_dna = dna.split("").reverse().join("");
+			var primer = getComplementaryPairs(reversed_dna.substring(0, 18));
+			var gel_length = reversed_dna.length - primer.length;
+			var gel = "<p>Recall we had the following starting material:</p><p><ul><li>ssDNA sequence: 5' <span style='color: green'>" + dna.substring(0, dna.length - 18) + "</span><span style='color: blue'>" + dna.substring(dna.length - 18, dna.length) + "</span> 3'</li><li>DNA primer: 5' " + primer + " 3'</li></ul></p><p>Cathode (-)</p><table class='gel'><tr><th>A</th><th>T</th><th>C</th><th>G</th></tr>";
+			for (i = gel_length - 1; i >= 0; i--)
+			{
+				gel += '<tr>';
+				if (reversed_dna.charAt(i + 18) == 'A')
+				gel += '<td class="filled">&nbsp;</td>';
+				else
+				gel += '<td>&nbsp;</td>';
+				if (reversed_dna.charAt(i + 18) == 'T')
+				gel += '<td class="filled">&nbsp;</td>';
+				else
+				gel += '<td>&nbsp;</td>';
+				if (reversed_dna.charAt(i + 18) == 'C')
+				gel += '<td class="filled">&nbsp;</td>';
+				else
+				gel += '<td>&nbsp;</td>';
+				if (reversed_dna.charAt(i + 18) == 'G')
+				gel += '<td class="filled">&nbsp;</td>';
+				else
+				gel += '<td>&nbsp;</td>';
+				gel += '</tr>';
+			}
+			gel += '</table><p>Anode (+)</p>';
+			gel += '<p><ul><li>From reading the gel, we can deduce the DNA sequence: <strong>5\' ' + reversed_dna.substring(18, reversed_dna.length).split("").reverse().join("") + ' 3\'</strong></li><li>Lane A corresponds to the ddTTP reaction, lane T corresponds to the ddATP reaction, and so on and so forth.</li><li>DNA, a negatively charged molecule, migrates to the anode.</li><li>The longer fragments are located near the cathode.</li><li>The dark bands on the gel are visible because of the labeled ddNTP molecules.</li></ul></p>';
+			$("#activity_2").html(gel);
+		}
+
+
+		function startReaction()
+		{
+			var input = $("#dna_sequence").val();
+			var dna = "";
+			if (input.length < 20 || input.length > 70)
+			{
+				alert("DNA sequence must be between 20 and 70 base pairs long");
+				return;
+			}
+			for (var i = 0; i < input.length; i++)
+			{
+				input_char = input.charAt(i).toUpperCase();
+				if (input_char != 'A' && input_char != 'T' && input_char != 'C' && input_char != 'G')
+				{
+					alert("Invalid DNA sequence entered!");
+					return;
+				}
+				dna += input_char;
+			}
+
+			var reversed_dna = dna.split("").reverse().join("");
+			var primer = getComplementaryPairs(reversed_dna.substring(0, 18));
+
+			$("#activity").html("<p>We have the following:</p><p><ol><li>ssDNA sequence: 5' <span style='color: green'>" + dna.substring(0, dna.length - 18) + "</span><span style='color: blue'>" + dna.substring(dna.length - 18, dna.length) + "</span> 3' (The green is what we're trying to find! The blue is what hybridizes with the primer)</li><li>DNA primer: 5' " + primer + " 3' (hybridizes with the blue region of DNA above)</li><li>DNA polymerase</li><li>dNTPs (dATP, dTTP, dCTP, dGTP)</li></ol></p><p>Now, we put them together! <strong class='click_to_proceed'>Click on the reaction tube below to proceed.</strong></p><p style='text-align: center'><img class='sample_tube' src='images/tube.png' style='cursor: pointer' /></p>");
+			$(".sample_tube").click(function() { 
+					$(".sample_tube").attr("src","images/tube_mixed.png"); 
+					$(".click_to_proceed").hide(); 
+					setTimeout(function() { $("#activity").html($("#activity").html() + "<p>Now, we divide the above mixture into 4 tubes and add a different dideoxyNTP to each tube.</p><p style='text-align: center'><img class='ddatp_tube' src='images/tube_ddatp.png' style='cursor: pointer' /><img class='ddttp_tube' src='images/tube_ddttp.png' style='cursor: pointer' /><img class='ddctp_tube' src='images/tube_ddctp.png' style='cursor: pointer' /><img class='ddgtp_tube' src='images/tube_ddgtp.png' style='cursor: pointer' /></p><p><strong>**Click on one of the above tubes to view the reaction that is occurring.**</strong></p><p>When the reaction has finished occurring, you transfer the contents of the four tubes to four lanes (one for each ddNTP) of the polyacrylamide-urea gel. Click the button below to view the gel:</p><p><input type='button' value='Proceed to gel electrophoresis' onclick=\"generateGel('" + dna + "')\" /></p>");
+			$(".ddatp_tube").click(function() { generateDNA(dna, 'A'); });
+			$(".ddttp_tube").click(function() { generateDNA(dna, 'T'); });
+			$(".ddctp_tube").click(function() { generateDNA(dna, 'C'); });
+			$(".ddgtp_tube").click(function() { generateDNA(dna, 'G'); });
+}, 700);
+				});
+
+
+		}
+
+	</script>
+</head>
+<body>
+	<div id="container">
+		<div id="header">
+			<div id="logo">
+				<a href="e25b.html">E25B: Dideoxy Chain Termination Method of DNA Sequencing</a>
+			</div>
+			<div id="navigation">
+				<ul>
+					<li><a href="e25b.html">Home</a></li>
+					<li><a href="e25b_history.html">History</a></li>
+					<li><a href="e25b_overview.html">Overview</a></li>
+					<li><a href="e25b_activity.html">Activity</a></li>
+					<li><a href="e25b_quiz.html">Quiz</a></li>
+					<li><a href="e25b_glossary.html">Glossary</a></li>
+					<li><a href="e25b_credit.html">Credit</a></li>
+				</ul>
+			</div>
+		</div>
+		<div id="content">
+		<div id="wrapper">
+		<h1 class="page_head">Activity</h1>
+			<div id="activity"><p>Please enter a DNA sequence:<br />5' <input type="text" size="100" id="dna_sequence" name="dna_sequence" /> 3'</p><p><input type="button" value="Start reaction" onclick="startReaction()" /> <input type="button" onclick="getRandomDNASequence()" value="Generate random DNA sequence" /></p></div>
+			<div style="display: none" id="activity_2"></div>
+			<p><input class="saved" type="button" value="Return to previous page" style="display: none" /></p>
+		</div>
+		</div>
+		<div id="footer">
+			Site created by Delaney Sullivan on May 27, 2013
+		</div>
+	</div>
+</body>
+</html>
