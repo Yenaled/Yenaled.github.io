@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+  <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Viewer</title>
+    <script src="https://unpkg.com/niivue/dist/niivue.umd.js"></script>
+    <style>html,body,#gl{height:100%;margin:0}</style>
+  </head>
+  <body>
+    <canvas id="gl"></canvas>
+    <script>
+      const nv = new niivue.Niivue({dragAndDropEnabled:true, isColorbar:true});
+      nv.attachTo('gl');
+      nv.loadVolumes([{url:'https://yenaled.github.io/assets/mri/DICOM_SEIZURE_20140421131023_3.nii.gz', volume:{hdr:null, img:null}}]);
+      // Scroll with mouse/trackpad or use keyboard arrows
+    </script>
+  </body>
+</html>
