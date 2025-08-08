@@ -1,20 +1,52 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>MRI Viewer</title>
-  <style>html,body,#gl{height:100%;margin:0}</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MRI Viewer – Multi-series</title>
+<style>
+  html,body {height:100%;margin:0;font-family:sans-serif;}
+  #topbar {padding:6px;background:#eee;display:flex;gap:10px;align-items:center;}
+  #gl {height:calc(100% - 40px);width:100%;}
+  select {padding:4px;}
+</style>
 </head>
 <body>
-  <canvas id="gl"></canvas>
-  <script type="module">
-    import { Niivue } from "https://cdn.jsdelivr.net/npm/@niivue/niivue@0.62.0/dist/index.js";
-    const nv = new Niivue({ dragAndDropEnabled: true, isColorbar: true });
-    await nv.attachTo("gl");
-    nv.loadVolumes([
-      { url: "mri/DICOM_SEIZURE_20140421131023_3.nii.gz" }
-    ]);
-  </script>
+
+<div id="topbar">
+  <label for="seriesSelect"><b>Select MRI Series:</b></label>
+  <select id="seriesSelect">
+    <option value="mri/DICOM_SEIZURE_20140421131023_3.nii.gz">FLAIR (Cor CUBE)</option>
+    <option value="mri/DICOM_SEIZURE_20140421131023_4.nii.gz">T2 (Sag CUBE)</option>
+    <option value="mri/DICOM_SEIZURE_20140421131023_6.nii.gz">T2 (Ax FSE)</option>
+    <option value="mri/DICOM_SEIZURE_20140421131023_9.nii.gz">T1 (Cor BRAVO pre)</option>
+    <option value="mri/DICOM_SEIZURE_20140421131023_10.nii.gz">T1 (Cor BRAVO post)</option>
+    <option value="mri/DICOM_SEIZURE_20140421131023_5.nii.gz">DWI (Ax)</option>
+    <option value="mri/DICOM_SEIZURE_20140421131023_500.nii.gz">ADC Map</option>
+  </select>
+</div>
+
+<canvas id="gl"></canvas>
+
+<script type="module">
+  import { Niivue } from "https://cdn.jsdelivr.net/npm/@niivue/niivue@0.62.0/dist/index.js";
+
+  const nv = new Niivue({ dragAndDropEnabled: true, isColorbar: true });
+  await nv.attachTo("gl");
+
+  const select = document.getElementById("seriesSelect");
+
+  // Load the default (first) option
+  loadSeries(select.value);
+
+  select.addEventListener("change", () => {
+    loadSeries(select.value);
+  });
+
+  function loadSeries(url) {
+    nv.loadVolumes([{ url }]);
+  }
+</script>
+
 </body>
 </html>
