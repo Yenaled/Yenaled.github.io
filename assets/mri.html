@@ -3,27 +3,36 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MRI Viewer – Multi-series</title>
+<title>MRI Viewer</title>
 <style>
   html,body {height:100%;margin:0;font-family:sans-serif;}
-  #topbar {padding:6px;background:#eee;display:flex;gap:10px;align-items:center;}
-  #gl {height:calc(100% - 40px);width:100%;}
-  select {padding:4px;}
+  #chooser {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    height:100%;
+    gap:10px;
+    background:#f5f5f5;
+  }
+  select, button {padding:6px; font-size:16px;}
+  #gl {height:100%;width:100%;display:none;}
 </style>
 </head>
 <body>
 
-<div id="topbar">
-  <label for="seriesSelect"><b>Select MRI Series:</b></label>
+<div id="chooser">
+  <h2>Select MRI Series</h2>
   <select id="seriesSelect">
-    <option value="mri/DICOM_SEIZURE_20140421131023_3.nii.gz">FLAIR (Cor CUBE)</option>
-    <option value="mri/DICOM_SEIZURE_20140421131023_4.nii.gz">T2 (Sag CUBE)</option>
-    <option value="mri/DICOM_SEIZURE_20140421131023_6.nii.gz">T2 (Ax FSE)</option>
-    <option value="mri/DICOM_SEIZURE_20140421131023_9.nii.gz">T1 (Cor BRAVO pre)</option>
-    <option value="mri/DICOM_SEIZURE_20140421131023_10.nii.gz">T1 (Cor BRAVO post)</option>
-    <option value="mri/DICOM_SEIZURE_20140421131023_5.nii.gz">DWI (Ax)</option>
-    <option value="mri/DICOM_SEIZURE_20140421131023_500.nii.gz">ADC Map</option>
+    <option value="mri_compressed/DICOM_SEIZURE_20140421131023_3.nii.gz">FLAIR (Cor CUBE)</option>
+    <option value="mri_compressed/DICOM_SEIZURE_20140421131023_4.nii.gz">T2 (Sag CUBE)</option>
+    <option value="mri_compressed/DICOM_SEIZURE_20140421131023_6.nii.gz">T2 (Ax FSE)</option>
+    <option value="mri_compressed/DICOM_SEIZURE_20140421131023_9.nii.gz">T1 (Cor BRAVO pre)</option>
+    <option value="mri_compressed/DICOM_SEIZURE_20140421131023_10.nii.gz">T1 (Cor BRAVO post)</option>
+    <option value="mri_compressed/DICOM_SEIZURE_20140421131023_5.nii.gz">DWI (Ax)</option>
+    <option value="mri_compressed/DICOM_SEIZURE_20140421131023_500.nii.gz">ADC Map</option>
   </select>
+  <button id="loadBtn">Load Series</button>
 </div>
 
 <canvas id="gl"></canvas>
@@ -31,21 +40,20 @@
 <script type="module">
   import { Niivue } from "https://cdn.jsdelivr.net/npm/@niivue/niivue@0.62.0/dist/index.js";
 
-  const nv = new Niivue({ dragAndDropEnabled: true, isColorbar: true });
-  await nv.attachTo("gl");
-
+  const chooser = document.getElementById("chooser");
+  const canvas = document.getElementById("gl");
+  const loadBtn = document.getElementById("loadBtn");
   const select = document.getElementById("seriesSelect");
 
-  // Load the default (first) option
-  loadSeries(select.value);
+  loadBtn.addEventListener("click", async () => {
+    const url = select.value;
+    chooser.style.display = "none";
+    canvas.style.display = "block";
 
-  select.addEventListener("change", () => {
-    loadSeries(select.value);
-  });
-
-  function loadSeries(url) {
+    const nv = new Niivue({ isColorbar: true, dragAndDropEnabled: true });
+    await nv.attachTo("gl");
     nv.loadVolumes([{ url }]);
-  }
+  });
 </script>
 
 </body>
